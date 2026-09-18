@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Careers | Gallardo Space Industries</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="icon" type="image/webp" href="images/GallardoSpaceIndustries.webp">
   <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -14,7 +15,12 @@
       <a href="index.html" class="nav-logo">
         <img src="images/GallardoSpaceIndustries.webp" alt="Gallardo Space Industries">
       </a>
-      <ul class="nav-links">
+      <button class="hamburger" id="hamburger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="about.html">About</a></li>
         <li><a href="innovations.html">Innovations</a></li>
@@ -80,7 +86,7 @@
         <input type="file" name="resume" accept=".pdf,.doc,.docx" required>
         <textarea name="message" placeholder="Why do you want to join Gallardo Space Industries?" rows="5"></textarea>
         <button type="submit" class="btn-primary">Submit Application</button>
-        <p class="form-success" id="careers-success" style="display:none; color: #00c8ff; margin-top: 12px;">Application received. We will be in touch.</p>
+        <p class="form-success" id="careers-success" style="display:none;">Application received. We will be in touch.</p>
       </form>
     </div>
   </section>

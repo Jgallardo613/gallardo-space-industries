@@ -63,6 +63,37 @@ body {
 
 .nav-links a:hover { color: var(--accent); }
 
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--white);
+  transition: all 0.3s;
+}
+
+.nav-links.open {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: rgba(5, 8, 16, 0.98);
+  padding: 20px 24px;
+  gap: 20px;
+  border-bottom: 1px solid var(--border);
+}
+
 /* HERO */
 .hero {
   min-height: 100vh;
@@ -510,21 +541,50 @@ footer p { color: var(--muted); font-size: 0.85rem; }
 
 .role-card p { color: var(--muted); font-size: 0.95rem; line-height: 1.6; }
 
-/* RESPONSIVE */
-@media (max-width: 900px) {
-  .stats-inner { grid-template-columns: repeat(2, 1fr); }
-  .founder-grid { grid-template-columns: 1fr; }
-  .founder-photo { width: 200px; height: 200px; }
+/* HAMBURGER / RESPONSIVE */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 4px;
+}
+
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--white);
+  transition: all 0.3s;
+}
+
+.nav-links.open {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  background: rgba(5, 8, 16, 0.98);
+  padding: 20px 24px;
+  gap: 20px;
+  border-bottom: 1px solid var(--border);
 }
 
 @media (max-width: 768px) {
   #nav { padding: 8px 20px; }
   .nav-logo img { height: 60px; width: 180px; }
   .nav-links { display: none; }
+  .hamburger { display: flex; }
   .hero { padding: 160px 20px 80px; }
   .section { padding: 60px 20px; }
   .page-hero { padding: 160px 20px 60px; }
   .stats-bar { padding: 36px 20px; }
+  .stats-inner { grid-template-columns: repeat(2, 1fr); }
+  .founder-grid { grid-template-columns: 1fr; }
+  .founder-photo { width: 200px; height: 200px; }
   .footer-inner { flex-direction: column; text-align: center; }
   .footer-links { justify-content: center; }
 }
