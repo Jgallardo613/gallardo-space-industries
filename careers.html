@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Careers | Gallardo Space Industries</title>
+  <link rel="stylesheet" href="styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <img src="images/GallardoSpaceIndustries.webp" alt="Gallardo Space Industries">
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="innovations.html">Innovations</a></li>
+        <li><a href="careers.html">Careers</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <section class="page-hero careers-hero">
+    <div class="page-hero-inner">
+      <p class="eyebrow">Careers</p>
+      <h1>Join the Mission</h1>
+      <p class="hero-sub">We're building defense and space technology that protects warfighters and brings them home. If you want to build things that matter, we want to hear from you.</p>
+    </div>
+  </section>
+
+  <section class="section section-dark">
+    <div class="section-inner">
+      <p class="section-label">Open Roles</p>
+      <h2>Current Openings</h2>
+      <div class="projects-list">
+        <div class="project-card">
+          <h3>Software Engineer</h3>
+          <p>Full stack development across our AI and autonomous platform projects. JavaScript, Python, cloud deployment experience preferred.</p>
+        </div>
+        <div class="project-card">
+          <h3>Embedded Systems Engineer</h3>
+          <p>Firmware and hardware integration for autonomous drone platforms. Real-time systems and sensor fusion experience a plus.</p>
+        </div>
+        <div class="project-card">
+          <h3>Systems Engineer</h3>
+          <p>Support technical development and proposal writing for government funding programs including SBIR and STTR.</p>
+        </div>
+        <div class="project-card">
+          <h3>General Application</h3>
+          <p>Don't see your role? We're always interested in strong engineers, operators, and builders. Send your resume and tell us what you do.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-inner">
+      <p class="section-label">Apply</p>
+      <h2>Submit Your Application</h2>
+      <p class="section-body">Fill out the form below and attach your resume. We review every application personally.</p>
+      <form name="careers" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data">
+        <input type="hidden" name="form-name" value="careers">
+        <p style="display:none"><input name="bot-field"></p>
+        <input type="text" name="first_name" placeholder="First Name" required>
+        <input type="text" name="last_name" placeholder="Last Name" required>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="tel" name="phone" placeholder="Phone Number">
+        <select name="role">
+          <option value="">Select a Role</option>
+          <option>Software Engineer</option>
+          <option>Embedded Systems Engineer</option>
+          <option>Systems Engineer</option>
+          <option>General Application</option>
+        </select>
+        <input type="url" name="linkedin" placeholder="LinkedIn URL">
+        <input type="file" name="resume" accept=".pdf,.doc,.docx" required>
+        <textarea name="message" placeholder="Why do you want to join Gallardo Space Industries?" rows="5"></textarea>
+        <button type="submit" class="btn-primary">Submit Application</button>
+        <p class="form-success" id="careers-success" style="display:none; color: #00c8ff; margin-top: 12px;">Application received. We will be in touch.</p>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-inner">
+      <img src="images/GallardoSpaceIndustries.webp" alt="GSI" class="footer-logo">
+      <p>&copy; 2026 Gallardo Space Industries. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="about.html">About</a>
+        <a href="innovations.html">Innovations</a>
+        <a href="careers.html">Careers</a>
+        <a href="contact.html">Contact</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
