@@ -23,17 +23,6 @@ body {
   overflow-x: hidden;
 }
 
-#starfield {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: -1;
-  pointer-events: none;
-  display: block;
-}
-
 /* NAV */
 #nav {
   position: fixed;
@@ -152,31 +141,28 @@ body {
   display: flex;
   align-items: center;
   padding: 200px 40px 100px;
-  background-image: linear-gradient(to bottom, rgba(5,8,16,0.55) 0%, rgba(5,8,16,0.8) 60%, rgba(5,8,16,1) 100%), url('images/Earth.jpg');
-  background-size: cover;
-  background-position: center top;
+  background: var(--bg);
 }
 
-.hero::before {
+.hero::before,
+.page-hero::before {
   content: '';
   position: absolute;
-  top: -20%;
-  left: -20%;
-  width: 70%;
-  height: 70%;
-  background: radial-gradient(circle, rgba(0, 212, 255, 0.35) 0%, rgba(0, 85, 255, 0.18) 35%, transparent 70%);
-  filter: blur(40px);
+  inset: 0;
   z-index: 0;
   pointer-events: none;
-  mix-blend-mode: screen;
-  animation: heroGlowDrift 22s ease-in-out infinite alternate;
+  background-image:
+    linear-gradient(rgba(0, 212, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 212, 255, 0.07) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse 75% 65% at 50% 30%, black 40%, transparent 85%);
+  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 30%, black 40%, transparent 85%);
+  animation: gridPulse 10s ease-in-out infinite;
 }
 
-@keyframes heroGlowDrift {
-  0%   { transform: translate(0, 0) scale(1); }
-  33%  { transform: translate(40%, 20%) scale(1.15); }
-  66%  { transform: translate(10%, 45%) scale(0.95); }
-  100% { transform: translate(55%, 10%) scale(1.1); }
+@keyframes gridPulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
 }
 
 #hero-particles {
@@ -235,43 +221,13 @@ body {
   transform: translateY(0);
 }
 
-/* TYPEWRITER CURSOR */
-.tw-cursor {
-  display: inline-block;
-  width: 3px;
-  height: 0.85em;
-  margin-left: 4px;
-  background: var(--accent);
-  vertical-align: -0.1em;
-  box-shadow: 0 0 10px var(--accent), 0 0 20px var(--accent);
-  animation: twBlink 0.9s steps(1, start) infinite;
-}
-
-@keyframes twBlink {
-  50% { opacity: 0; }
-}
-
-/* HERO BUTTON PULSE */
-.hero-actions .btn-primary,
-.hero-actions .btn-ghost {
-  animation: btnPulse 2s ease-in-out infinite;
-}
-
-.hero-actions .btn-primary:hover,
-.hero-actions .btn-ghost:hover {
-  animation-play-state: paused;
-}
-
-@keyframes btnPulse {
-  0%, 100% { box-shadow: 0 0 14px rgba(0, 212, 255, 0.2); }
-  50% { box-shadow: 0 0 26px 2px rgba(0, 212, 255, 0.6); }
-}
-
 /* STATS BAR */
 .stats-bar {
   position: relative;
-  background: var(--surface);
-  border-bottom: 1px solid var(--border);
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-glow);
   padding: 48px 40px;
 }
 
@@ -365,8 +321,8 @@ footer::before {
   width: 100%;
   height: 1px;
   background: linear-gradient(90deg, transparent, var(--accent), transparent);
-  box-shadow: 0 0 16px 1px rgba(0, 212, 255, 0.6);
-  opacity: 0.55;
+  box-shadow: 0 0 10px 0.5px rgba(0, 212, 255, 0.4);
+  opacity: 0.4;
 }
 
 .section-inner {
@@ -548,8 +504,7 @@ footer::before {
   isolation: isolate;
   padding: 220px 40px 80px;
   width: 100%;
-  background-size: cover;
-  background-position: center top;
+  background: var(--bg);
 }
 
 .page-hero-inner {
@@ -567,23 +522,6 @@ footer::before {
   color: var(--white);
   line-height: 1.2;
   margin-bottom: 20px;
-}
-
-/* PAGE HERO BACKGROUNDS */
-.about-hero {
-  background-image: linear-gradient(to bottom, rgba(5,8,16,0.55) 0%, rgba(5,8,16,0.8) 60%, rgba(5,8,16,1) 100%), url('images/about.webp');
-}
-
-.innovations-hero {
-  background-image: linear-gradient(to bottom, rgba(5,8,16,0.55) 0%, rgba(5,8,16,0.8) 60%, rgba(5,8,16,1) 100%), url('images/innovations.jpg');
-}
-
-.careers-hero {
-  background-image: linear-gradient(to bottom, rgba(5,8,16,0.55) 0%, rgba(5,8,16,0.8) 60%, rgba(5,8,16,1) 100%), url('images/careers.jpeg');
-}
-
-.contact-hero {
-  background-image: linear-gradient(to bottom, rgba(5,8,16,0.55) 0%, rgba(5,8,16,0.8) 60%, rgba(5,8,16,1) 100%), url('images/contact.jpg');
 }
 
 /* FOUNDER */
@@ -695,12 +633,9 @@ form input[type="file"] {
     opacity: 1 !important;
     transform: none !important;
   }
-  #starfield,
   #hero-particles { display: none !important; }
-  .hero::before { animation: none !important; }
-  .tw-cursor { animation: none !important; }
-  .hero-actions .btn-primary,
-  .hero-actions .btn-ghost { animation: none !important; }
+  .hero::before,
+  .page-hero::before { animation: none !important; }
   .nav-logo img { transition: none !important; }
 }
 

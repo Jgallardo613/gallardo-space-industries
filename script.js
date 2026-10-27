@@ -67,26 +67,6 @@ const observer = new IntersectionObserver(entries => {
 }, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
 reveals.forEach(el => observer.observe(el));
 
-// HERO PARALLAX
-const parallaxEls = document.querySelectorAll('.hero, .page-hero');
-if (parallaxEls.length && !prefersReducedMotion) {
-  let parallaxTicking = false;
-  const applyParallax = () => {
-    const offset = Math.min(window.scrollY * 0.3, 220);
-    parallaxEls.forEach(el => {
-      el.style.backgroundPositionY = `${offset}px`;
-    });
-    parallaxTicking = false;
-  };
-  window.addEventListener('scroll', () => {
-    if (!parallaxTicking) {
-      parallaxTicking = true;
-      requestAnimationFrame(applyParallax);
-    }
-  }, { passive: true });
-  applyParallax();
-}
-
 // HERO SEQUENTIAL FADE-IN
 const heroFadeTargets = document.querySelectorAll('.hero .eyebrow, .hero h1, .hero .hero-sub, .hero .hero-actions, .page-hero .eyebrow, .page-hero h1, .page-hero .hero-sub');
 if (heroFadeTargets.length) {
@@ -97,39 +77,6 @@ if (heroFadeTargets.length) {
     heroFadeTargets.forEach((el, i) => {
       setTimeout(() => el.classList.add('visible'), i * 300);
     });
-  }
-}
-
-// HERO TYPEWRITER
-const heroHeading = document.querySelector('.hero h1');
-if (heroHeading) {
-  const twLines = heroHeading.querySelectorAll('.tw-line');
-  if (twLines.length) {
-    const lineWords = Array.from(twLines).map(line => ({
-      el: line,
-      words: line.textContent.trim().split(/\s+/)
-    }));
-
-    if (prefersReducedMotion) {
-      lineWords.forEach(({ el, words }) => { el.textContent = words.join(' '); });
-    } else {
-      lineWords.forEach(({ el }) => { el.textContent = ''; });
-      const cursor = document.createElement('span');
-      cursor.className = 'tw-cursor';
-      heroHeading.appendChild(cursor);
-
-      const wordInterval = 160;
-      let delay = 450; // starts as the headline fades in (300ms) plus a short beat
-      lineWords.forEach(({ el, words }) => {
-        words.forEach((_, i) => {
-          setTimeout(() => {
-            el.textContent = words.slice(0, i + 1).join(' ');
-            el.appendChild(cursor);
-          }, delay);
-          delay += wordInterval;
-        });
-      });
-    }
   }
 }
 
@@ -245,64 +192,6 @@ if (statNums.length) {
     });
   }, { threshold: 0.5 });
   statNums.forEach(el => statObserver.observe(el));
-}
-
-// STAR FIELD BACKGROUND
-if (!prefersReducedMotion) {
-  const canvas = document.createElement('canvas');
-  canvas.id = 'starfield';
-  canvas.setAttribute('aria-hidden', 'true');
-  document.body.prepend(canvas);
-  const ctx = canvas.getContext('2d');
-
-  let stars = [];
-  let w, h, dpr, frame = 0, visible = true;
-
-  function resizeStarfield() {
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    w = window.innerWidth;
-    h = window.innerHeight;
-    canvas.width = w * dpr;
-    canvas.height = h * dpr;
-    canvas.style.width = `${w}px`;
-    canvas.style.height = `${h}px`;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-
-    const count = w < 600 ? 60 : 140;
-    stars = Array.from({ length: count }, () => ({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      r: Math.random() * 1.3 + 0.3,
-      baseAlpha: Math.random() * 0.5 + 0.3,
-      speed: Math.random() * 0.015 + 0.004,
-      phase: Math.random() * Math.PI * 2
-    }));
-  }
-
-  function drawStarfield() {
-    if (!visible) return;
-    frame++;
-    ctx.clearRect(0, 0, w, h);
-    ctx.fillStyle = '#e8eaf0';
-    for (const s of stars) {
-      const alpha = s.baseAlpha + Math.sin(frame * s.speed + s.phase) * 0.3;
-      ctx.globalAlpha = Math.max(0, Math.min(1, alpha));
-      ctx.beginPath();
-      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-      ctx.fill();
-    }
-    ctx.globalAlpha = 1;
-    requestAnimationFrame(drawStarfield);
-  }
-
-  document.addEventListener('visibilitychange', () => {
-    visible = !document.hidden;
-    if (visible) requestAnimationFrame(drawStarfield);
-  });
-
-  window.addEventListener('resize', resizeStarfield, { passive: true });
-  resizeStarfield();
-  requestAnimationFrame(drawStarfield);
 }
 
 // CONTACT FORM - Netlify submission
