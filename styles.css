@@ -18,6 +18,17 @@ body {
   overflow-x: hidden;
 }
 
+#starfield {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  display: block;
+}
+
 /* NAV */
 #nav {
   position: fixed;
@@ -53,6 +64,8 @@ body {
 }
 
 .nav-links a {
+  position: relative;
+  display: inline-block;
   color: var(--muted);
   text-decoration: none;
   font-size: 0.85rem;
@@ -61,7 +74,21 @@ body {
   transition: color 0.3s;
 }
 
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 1px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.3s ease;
+}
+
 .nav-links a:hover { color: var(--accent); }
+.nav-links a:hover::after { transform: scaleX(1); }
 
 .hamburger {
   display: none;
@@ -184,11 +211,15 @@ body {
   text-transform: uppercase;
   border: none;
   cursor: pointer;
-  transition: opacity 0.3s, transform 0.2s;
+  transition: opacity 0.3s, transform 0.2s, box-shadow 0.3s;
   display: inline-block;
 }
 
-.btn-primary:hover { opacity: 0.85; transform: translateY(-2px); }
+.btn-primary:hover {
+  opacity: 0.85;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(0, 200, 255, 0.35);
+}
 
 .btn-ghost {
   border: 1px solid rgba(255,255,255,0.3);
@@ -200,11 +231,16 @@ body {
   font-size: 0.85rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
-  transition: border-color 0.3s, color 0.3s;
+  transition: border-color 0.3s, color 0.3s, transform 0.2s, box-shadow 0.3s;
   display: inline-block;
 }
 
-.btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+.btn-ghost:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(0, 200, 255, 0.18);
+}
 
 /* SECTIONS */
 .section { padding: 100px 40px; }
@@ -260,10 +296,14 @@ body {
   border: 1px solid var(--border);
   border-radius: 14px;
   padding: 32px;
-  transition: border-color 0.3s, transform 0.3s;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
 }
 
-.cap-card:hover { border-color: var(--accent); transform: translateY(-4px); }
+.cap-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(0, 200, 255, 0.12);
+}
 
 .cap-card h3 {
   font-family: 'Rajdhani', sans-serif;
@@ -300,10 +340,14 @@ body {
   border: 1px solid var(--border);
   border-radius: 14px;
   padding: 32px 36px;
-  transition: border-color 0.3s, transform 0.3s;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
 }
 
-.project-card:hover { border-color: var(--accent); transform: translateX(6px); }
+.project-card:hover {
+  border-color: var(--accent);
+  transform: translateX(6px);
+  box-shadow: 0 16px 32px rgba(0, 200, 255, 0.12);
+}
 
 .project-card h3 {
   font-family: 'Rajdhani', sans-serif;
@@ -328,6 +372,12 @@ body {
   padding: 24px 28px;
   background: var(--surface);
   border-radius: 0 12px 12px 0;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.why-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(0, 200, 255, 0.12);
 }
 
 .why-card h3 {
@@ -461,12 +511,21 @@ form input[type="file"] {
 .reveal {
   opacity: 0;
   transform: translateY(30px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
+  transition: opacity 0.8s cubic-bezier(0.2, 0.65, 0.3, 1), transform 0.8s cubic-bezier(0.2, 0.65, 0.3, 1);
 }
 
 .reveal.visible {
   opacity: 1;
   transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  #starfield { display: none !important; }
 }
 
 /* FOOTER */
@@ -508,10 +567,14 @@ footer p { color: var(--muted); font-size: 0.85rem; }
   border: 1px solid var(--border);
   border-radius: 14px;
   padding: 28px 32px;
-  transition: border-color 0.3s;
+  transition: border-color 0.3s, transform 0.3s, box-shadow 0.3s;
 }
 
-.role-card:hover { border-color: var(--accent); }
+.role-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px rgba(0, 200, 255, 0.12);
+}
 
 .role-head {
   display: flex;
