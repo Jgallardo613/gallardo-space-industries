@@ -54,7 +54,7 @@ document.querySelectorAll('.cap-grid, .projects-list, .why-grid, .roles-list').f
   });
 });
 
-document.querySelectorAll('.founder-grid, form').forEach(el => el.classList.add('reveal'));
+document.querySelectorAll('.founder-panel, form').forEach(el => el.classList.add('reveal'));
 
 const reveals = document.querySelectorAll('.reveal');
 const observer = new IntersectionObserver(entries => {
@@ -88,7 +88,7 @@ if (parallaxEls.length && !prefersReducedMotion) {
 }
 
 // HERO SEQUENTIAL FADE-IN
-const heroFadeTargets = document.querySelectorAll('.hero .eyebrow, .hero h1, .hero .hero-sub, .hero .hero-actions');
+const heroFadeTargets = document.querySelectorAll('.hero .eyebrow, .hero h1, .hero .hero-sub, .hero .hero-actions, .page-hero .eyebrow, .page-hero h1, .page-hero .hero-sub');
 if (heroFadeTargets.length) {
   heroFadeTargets.forEach(el => el.classList.add('hero-fade'));
   if (prefersReducedMotion) {
@@ -134,7 +134,7 @@ if (heroHeading) {
 }
 
 // HERO PARTICLE FIELD
-const heroEl = document.querySelector('.hero');
+const heroEl = document.querySelector('.hero, .page-hero');
 if (heroEl && !prefersReducedMotion) {
   const particleCanvas = document.createElement('canvas');
   particleCanvas.id = 'hero-particles';
