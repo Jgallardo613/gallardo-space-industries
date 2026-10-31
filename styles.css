@@ -54,6 +54,7 @@ body {
 
 .nav-logo {
   display: block;
+  background: transparent;
   perspective: 600px;
 }
 
@@ -62,6 +63,7 @@ body {
   width: 380px;
   object-fit: cover;
   display: block;
+  background: transparent;
   transition: transform 0.15s ease;
   will-change: transform;
 }
@@ -142,35 +144,6 @@ body {
   align-items: center;
   padding: 200px 40px 100px;
   background: var(--bg);
-}
-
-.hero::before,
-.page-hero::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-  pointer-events: none;
-  background-image:
-    linear-gradient(rgba(0, 212, 255, 0.07) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(0, 212, 255, 0.07) 1px, transparent 1px);
-  background-size: 56px 56px;
-  mask-image: radial-gradient(ellipse 75% 65% at 50% 30%, black 40%, transparent 85%);
-  -webkit-mask-image: radial-gradient(ellipse 75% 65% at 50% 30%, black 40%, transparent 85%);
-  animation: gridPulse 10s ease-in-out infinite;
-}
-
-@keyframes gridPulse {
-  0%, 100% { opacity: 0.55; }
-  50% { opacity: 1; }
-}
-
-#hero-particles {
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  pointer-events: none;
-  display: block;
 }
 
 .hero-content {
@@ -255,6 +228,43 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--muted);
+}
+
+/* CREDENTIALS STRIP */
+.credentials-strip {
+  position: relative;
+  background: var(--surface);
+  border-top: 1px solid var(--border-glow);
+  padding: 28px 40px;
+}
+
+.credentials-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+}
+
+.credential-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  color: var(--muted);
+}
+
+.credential-item::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--accent);
+  flex-shrink: 0;
 }
 
 /* BUTTONS */
@@ -454,6 +464,19 @@ footer::before {
 
 .project-card p { color: var(--muted); line-height: 1.7; }
 
+.project-card .btn-primary,
+.project-card .btn-ghost {
+  margin-top: 20px;
+}
+
+.tech-image {
+  width: 100%;
+  display: block;
+  border-radius: 10px;
+  border: 1px solid var(--border-glow);
+  margin-bottom: 20px;
+}
+
 /* WHY GRID */
 .why-grid {
   display: grid;
@@ -633,9 +656,6 @@ form input[type="file"] {
     opacity: 1 !important;
     transform: none !important;
   }
-  #hero-particles { display: none !important; }
-  .hero::before,
-  .page-hero::before { animation: none !important; }
   .nav-logo img { transition: none !important; }
 }
 
@@ -661,7 +681,15 @@ footer {
   gap: 14px;
 }
 
-.footer-logo { height: 60px; width: auto; }
+.footer-logo {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  background: transparent;
+  margin: 0;
+}
 
 .footer-copy { color: var(--muted); font-size: 0.85rem; }
 
@@ -729,6 +757,38 @@ footer {
 
 .role-card p { color: var(--muted); font-size: 0.95rem; line-height: 1.6; }
 
+/* STATUS PILL + AGENCY TAGS (programs) */
+.status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--accent);
+  background: rgba(0, 212, 255, 0.1);
+  border: 1px solid var(--accent);
+  border-radius: 999px;
+  padding: 4px 14px;
+  white-space: nowrap;
+}
+
+.status-pill::before {
+  content: '';
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 6px var(--accent);
+}
+
+.agency-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 4px;
+}
+
 /* HAMBURGER / RESPONSIVE */
 .hamburger {
   display: none;
@@ -763,11 +823,14 @@ footer {
   border-bottom: 1px solid rgba(0, 212, 255, 0.2);
 }
 
-@media (max-width: 768px) {
+@media (max-width: 960px) {
   #nav { padding: 8px 20px; }
   .nav-logo img { height: 60px; width: 180px; }
   .nav-links { display: none; }
   .hamburger { display: flex; }
+}
+
+@media (max-width: 768px) {
   .hero { padding: 160px 20px 80px; }
   .section { padding: 60px 20px; }
   .page-hero { padding: 160px 20px 60px; }

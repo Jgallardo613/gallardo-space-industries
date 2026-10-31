@@ -68,7 +68,7 @@ const observer = new IntersectionObserver(entries => {
 reveals.forEach(el => observer.observe(el));
 
 // HERO SEQUENTIAL FADE-IN
-const heroFadeTargets = document.querySelectorAll('.hero .eyebrow, .hero h1, .hero .hero-sub, .hero .hero-actions, .page-hero .eyebrow, .page-hero h1, .page-hero .hero-sub');
+const heroFadeTargets = document.querySelectorAll('.hero .eyebrow, .hero h1, .hero .hero-sub, .hero .hero-actions, .page-hero .eyebrow, .page-hero h1, .page-hero .hero-sub, .page-hero .hero-actions');
 if (heroFadeTargets.length) {
   heroFadeTargets.forEach(el => el.classList.add('hero-fade'));
   if (prefersReducedMotion) {
@@ -78,67 +78,6 @@ if (heroFadeTargets.length) {
       setTimeout(() => el.classList.add('visible'), i * 300);
     });
   }
-}
-
-// HERO PARTICLE FIELD
-const heroEl = document.querySelector('.hero, .page-hero');
-if (heroEl && !prefersReducedMotion) {
-  const particleCanvas = document.createElement('canvas');
-  particleCanvas.id = 'hero-particles';
-  particleCanvas.setAttribute('aria-hidden', 'true');
-  heroEl.insertBefore(particleCanvas, heroEl.firstChild);
-  const pctx = particleCanvas.getContext('2d');
-
-  let particles = [];
-  let pw, ph, pdpr, particlesVisible = true;
-
-  function resizeParticles() {
-    pdpr = Math.min(window.devicePixelRatio || 1, 2);
-    pw = heroEl.offsetWidth;
-    ph = heroEl.offsetHeight;
-    particleCanvas.width = pw * pdpr;
-    particleCanvas.height = ph * pdpr;
-    particleCanvas.style.width = `${pw}px`;
-    particleCanvas.style.height = `${ph}px`;
-    pctx.setTransform(pdpr, 0, 0, pdpr, 0, 0);
-
-    const count = pw < 600 ? 90 : 200;
-    particles = Array.from({ length: count }, () => ({
-      x: Math.random() * pw,
-      y: Math.random() * ph,
-      r: Math.random() * 1.8 + 0.4,
-      speed: Math.random() * 0.4 + 0.1,
-      alpha: Math.random() * 0.5 + 0.25
-    }));
-  }
-
-  function drawParticles() {
-    if (!particlesVisible) return;
-    pctx.clearRect(0, 0, pw, ph);
-    pctx.fillStyle = '#ffffff';
-    for (const p of particles) {
-      pctx.globalAlpha = p.alpha;
-      pctx.beginPath();
-      pctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      pctx.fill();
-      p.y -= p.speed;
-      if (p.y < -4) {
-        p.y = ph + 4;
-        p.x = Math.random() * pw;
-      }
-    }
-    pctx.globalAlpha = 1;
-    requestAnimationFrame(drawParticles);
-  }
-
-  document.addEventListener('visibilitychange', () => {
-    particlesVisible = !document.hidden;
-    if (particlesVisible) requestAnimationFrame(drawParticles);
-  });
-
-  window.addEventListener('resize', resizeParticles, { passive: true });
-  resizeParticles();
-  requestAnimationFrame(drawParticles);
 }
 
 // LOGO 3D TILT
