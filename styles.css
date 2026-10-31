@@ -143,7 +143,10 @@ body {
   display: flex;
   align-items: center;
   padding: 200px 40px 100px;
-  background: var(--bg);
+  background-color: var(--bg);
+  background-image: linear-gradient(to bottom, rgba(10, 10, 15, 0.55) 0%, rgba(10, 10, 15, 0.82) 60%, rgba(10, 10, 15, 1) 100%), url('images/Earth.jpg');
+  background-size: cover;
+  background-position: center top;
 }
 
 .hero-content {
@@ -527,7 +530,25 @@ footer::before {
   isolation: isolate;
   padding: 220px 40px 80px;
   width: 100%;
-  background: var(--bg);
+  background-color: var(--bg);
+  background-size: cover;
+  background-position: center top;
+}
+
+.about-hero {
+  background-image: linear-gradient(to bottom, rgba(10, 10, 15, 0.55) 0%, rgba(10, 10, 15, 0.82) 60%, rgba(10, 10, 15, 1) 100%), url('images/about.webp');
+}
+
+.innovations-hero {
+  background-image: linear-gradient(to bottom, rgba(10, 10, 15, 0.55) 0%, rgba(10, 10, 15, 0.82) 60%, rgba(10, 10, 15, 1) 100%), url('images/innovations.jpg');
+}
+
+.careers-hero {
+  background-image: linear-gradient(to bottom, rgba(10, 10, 15, 0.55) 0%, rgba(10, 10, 15, 0.82) 60%, rgba(10, 10, 15, 1) 100%), url('images/careers.jpeg');
+}
+
+.contact-hero {
+  background-image: linear-gradient(to bottom, rgba(10, 10, 15, 0.55) 0%, rgba(10, 10, 15, 0.82) 60%, rgba(10, 10, 15, 1) 100%), url('images/contact.jpg');
 }
 
 .page-hero-inner {
